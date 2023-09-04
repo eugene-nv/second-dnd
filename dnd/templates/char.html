@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="m-16 p-4 flex flex-row border-4 border-red-600/50 rounded-lg bg-yellow-50">
+        <div>
+                <p><img class="h-144 w-96 object-cover rounded-lg" src="{{char.portrait.url}}" alt="img"></p>
+        </div>
+        <div class="px-8">
+                <p class="font-semibold">{{ char.name }}</p><br>
+                <p>{{ char.race }} - {{ char.klass }}</p>
+                <p>{{ char.level }} уровня</p><br>
+                <p class="font-semibold">Характеристики:</p><br>
+                <p>Сила {{ char.strength }}</p>
+                <p>Ловкость {{ char.dexterity }}</p>
+                <p>Телосложение {{ char.constitution }}</p>
+                <p>Интеллект {{ char.intelligence }}</p>
+                <p>Мудрость {{ char.wisdom }}</p>
+                <p>Харизма {{ char.charisma }}</p><br>
+        <div class="flex flex-row">
+                {% if user ==  char.owner %}
+                <div class="pr-2">
+                    <form action="{% url 'update_character' char.pk %}">
+                        {% csrf_token %}
+                        <button class="bg-transparent hover:bg-yellow-500 text-yellow-700 font-semibold hover:text-white py-2 px-4 border border-yellow-500 hover:border-transparent rounded"
+                                type="submit">
+                            Изменить
+                        </button>
+                    </form>
+                </div>
+                    <form action="{% url 'delete_character' char.pk %}" method="post">
+                        {% csrf_token %}
+                        <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+                                type="submit">
+                            Удалить
+                        </button>
+                    </form>
+                </div>
+        </div>
+        {% endif %}
+
+
+<!--<div class="px-4 pt-4 m-8 border-4 border-red-600/50 rounded-lg hover:bg-yellow-50" >-->
+<!--                <p><img class="h-144 w-96 object-cover rounded-lg" src="{{char.portrait.url}}" alt="img"></p><br>-->
+<!--                <p>{{ char.name }}</p>-->
+<!--        </div>-->
+<!--        <div>-->
+
+<!--        </div>-->
+
+
+
+
+<!--        <p><img class="h-72 w-48 object-cover rounded-lg" src="{{char.portrait.url}}" alt="img"></p><br>-->
+<!--        {{ char.name }}<br>-->
+<!--        {{ char.race }}<br>-->
+<!--        {{ char.klass }}<br>-->
+<!--        {{ char.level }}<br>-->
+
+<!--        <a href="{% url 'delete_character' char.pk %}">delete</a>-->
+<!--        <a href="{% url 'update_character' char.pk %}">update</a>-->
+
+<!--        {% if user ==  char.owner %}-->
+<!--                <div class="container mx-auto flex space-x-4 py-2">-->
+<!--                    <form action="{% url 'update_character' char.pk %}">-->
+<!--                        {% csrf_token %}-->
+<!--                        <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"-->
+<!--                                type="submit">-->
+<!--                            Edit-->
+<!--                        </button>-->
+<!--                    </form>-->
+<!--                    <form action="{% url 'delete_character' char.pk %}" method="post">-->
+<!--                        {% csrf_token %}-->
+<!--                        <button class="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"-->
+<!--                                type="submit">-->
+<!--                            Delete-->
+<!--                        </button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--        {% endif %}-->
+
+
+<!--        <form method="post">{% csrf_token %}-->
+<!--                <p>Are you sure you want to delete "{{ char }}"?</p>-->
+<!--                {{ form }}-->
+<!--                <input type="submit" value="Confirm">-->
+<!--        </form>-->
+{% endblock content %}

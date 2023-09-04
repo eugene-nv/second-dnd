@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+
+
+{% block content %}
+<div class="flex justify-center">
+    <div class="p-4">
+    <h1 class="py-8">
+        <a class="font-medium text-red-600 hover:underline" href="{% url 'register' %}">
+            Зарегистрируйтесь
+        </a>
+        если у вас нет аккаунта
+    </h1>
+
+
+    {% if form.errors %}
+        <p>{{ form.errors.error }}</p>
+    {% endif %}
+
+    <form class="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm" action="{% url 'login' %}" method="post">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Войти</button>
+    </form>
+    </div>
+</div>
+{% endblock content %}

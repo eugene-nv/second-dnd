@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex flex-wrap">
+    {% for char in characters %}
+    <div class="px-4 pt-4 m-8 border-4 border-red-600/50 rounded-lg hover:bg-yellow-50" >
+        <p><img class="h-72 w-48 object-cover rounded-lg" src="{{char.portrait.url}}" alt="img"></p><br>
+        <a class="underline underline-offset-2 font-semibold text-red-700 hover:text-red-500 justify-center flex" href="{% url 'show_characters' char.pk %}">{{ char.name }}</a>
+        <p class="justify-center flex pb-4">{{ char.race }} - {{ char.klass }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

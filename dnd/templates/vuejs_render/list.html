@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% verbatim %}
+        <h1>Список персонажей</h1>
+            <div class="flex flex-wrap" id="list_app">
+                <div v-for="char in characters">
+                    <div class="px-4 pt-4 m-8 border-4 border-red-600/50 rounded-lg hover:bg-yellow-50" >
+                        <p><img class="h-72 w-48 object-cover rounded-lg" v-bind:src="char.portrait"/></p><br>
+                        <a class="underline underline-offset-2 font-semibold text-red-700 hover:text-red-500 justify-center flex" href="{% url 'show_characters' char.pk %}">{{ char.name }}</a>
+                        <p class="justify-center flex pb-4">{{ char.race }} - {{ char.klass }}</p>
+                    </div>
+                </div>
+            </div>
+    {% endverbatim %}
+    <script src="/static/list.js"></script>
+{% endblock content %}

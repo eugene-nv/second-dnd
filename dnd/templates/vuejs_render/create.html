@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% verbatim %}
+        <h1>Создание персонажа</h1>
+
+        <div id="create_app">
+            <form v-on:submit.prevent="addForm" method="POST" enctype="multipart/form-data">
+
+                <div class="flex my-4 space-x-[30px]">
+                    <h3>Раса: </h3>
+
+                    <select v-model="character.race">
+                        <option disabled>Выберите расу</option>
+                        <option value="Дварф">Дварф</option>
+                        <option value="Эльф">Эльф</option>
+                        <option value="Полурослик">Полурослик</option>
+                    </select>
+                </div>
+
+                <div class="flex my-4 space-x-[30px]">
+                    <h3>Класс: </h3>
+                    <select v-model="character.klass">
+                        <option disabled>Выберите класс</option>
+                        <option value="Варвар">Варвар</option>
+                        <option value="Бард">Бард</option>
+                        <option value="Жрец">Жрец</option>
+                    </select>
+                </div>
+
+                <div class="flex my-4 space-x-[30px]">
+                    <h3>Имя: </h3>
+                <input v-model="character.name" class="border mx-4">
+                </div>
+
+                <div class="flex my-4 space-x-[30px]">
+                    <h3>Пол: </h3>
+                <select v-model="character.gender">
+                        <option disabled>Выберите пол</option>
+                        <option value="Мужской">Мужской</option>
+                        <option value="Женский">Женский</option>
+                    </select>
+                </div>
+
+                <div class="flex my-4 space-x-[30px]">
+                    <h3>Мировоззрение: </h3>
+                <select v-model="character.ideology">
+                        <option disabled>Выберите мировоззрение</option>
+                        <option value="Законно-доброе">Законно-доброе</option>
+                        <option value="Нейтрально-доброе">Нейтрально-доброе</option>
+                    </select>
+                </div>
+
+                <div>
+                    <h3>Портрет</h3>
+                    <input type="file" name="Портрет" multiple accept="image/*">
+                </div>
+
+                <div class="flex my-4">
+                <h3>Сила: </h3>
+                    <a class="mx-4">{{ character.strength }}</a>
+                    <button class="w-6 mx-4 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.strength++">+</button>
+                    <button class="w-6 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.strength--">-</button>
+                </div>
+
+                <div class="flex my-4">
+                <h3>Ловкость: </h3>
+                    <a class="mx-4">{{ character.dexterity }}</a>
+                    <button class="w-6 mx-4 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.dexterity++">+</button>
+                    <button class="w-6 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.dexterity--">-</button>
+                </div>
+
+                <div class="flex my-4">
+                <h3>Телосложение: </h3>
+                    <a class="mx-4">{{ character.constitution }}</a>
+                    <button class="w-6 mx-4 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.constitution++">+</button>
+                    <button class="w-6 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.constitution--">-</button>
+                </div>
+
+                <div class="flex my-4">
+                <h3>Интеллект: </h3>
+                    <a class="mx-4">{{ character.intelligence }}</a>
+                    <button class="w-6 mx-4 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.intelligence++">+</button>
+                    <button class="w-6 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.intelligence--">-</button>
+                </div>
+
+                <div class="flex my-4">
+                <h3>Мудрость: </h3>
+                    <a class="mx-4">{{ character.wisdom }}</a>
+                    <button class="w-6 mx-4 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.wisdom++">+</button>
+                    <button class="w-6 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.wisdom--">-</button>
+                </div>
+
+                <div class="flex my-4">
+                <h3>Харизма: </h3>
+                    <a class="mx-4">{{ character.charisma }}</a>
+                    <button class="w-6 mx-4 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.charisma++">+</button>
+                    <button class="w-6 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500" v-on:click="character.charisma--">-</button>
+                </div>
+
+
+                <button v-on:click="addForm()" type="submit" class="px-4 my-4 border rounded-full bg-amber-50 border-black hover:border-red-500 hover:text-red-500">Создать</button>
+            </form>
+
+        </div>
+ {% endverbatim %}
+    <script src="/static/create.js"></script>
+{% endblock content %}
