@@ -1,9 +1,12 @@
+import random
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from .forms import CharacterForm
 from .models import Character
+from .services.services import modifier, dice_hp
 
 
 class CharacterViews(ListView):
@@ -28,7 +31,13 @@ class CreateCharacter(CreateView):
     model = Character
 
     def form_valid(self, form):
-        form.instance.owner = self.request.user
+        instance = form.save(commit=False)
+        instance.owner = self.request.user
+        instance.level = 1
+        instance.experience = 0
+        instance.hp = modifier(instance.constitution) + random.randint(1, dice_hp(instance.klass))
+        instance.ac = modifier(instance.dexterity) + modifier(instance.constitution) + 10
+        instance.save()
         return super().form_valid(form)
 
 
@@ -55,7 +64,7 @@ class CharacterDeleteView(DeleteView):
 
 class CharacterUpdateView(UpdateView):
     model = Character
-    fields = '__all__'
+    fields = ['name', 'portrait', 'ideology']
     template_name = 'update.html'
     success_url = reverse_lazy("home")
 
@@ -63,5 +72,8 @@ class CharacterUpdateView(UpdateView):
 def list_app(request):
     return render(request, 'vuejs_render/list.html')
 
+
 def create_app(request):
     return render(request, 'vuejs_render/create.html')
+
+

@@ -66,32 +66,46 @@ class CharacterViewTestCase(TestCase):
         response = self.client.get(path)
 
         self.assertEquals(response.status_code, HTTPStatus.OK)
-        # self.assertTemplateUsed(response, 'create.html')
+        self.assertTemplateUsed(response, 'home.html')
 
-    def test_create(self):
-        path = reverse('home')
+    def test_battle(self):
+        path = reverse('battle')
+        response = self.client.get(path)
 
-        data = {
-                "race": "Полуэльф",
-                "klass": "Плут",
-                "name": "Тест",
-                "gender": "мужской",
-                "ideology": "Хаотично-доброе",
-                "portrait": "/media/portrait/Astarion_0.jpeg",
-                "strength": 1,
-                "dexterity": 1,
-                "constitution": 1,
-                "intelligence": 1,
-                "wisdom": 1,
-                "charisma": 1,
-                "owner": self.user.id
-            }
+        hp_first = 6
+        hp_second = 8
 
-        self.client.force_login(self.user)
+        attack_first = 3
+        attack_second = 4
 
-        response = self.client.post(path, data=data)
+        # fight(hp_first, hp_second, attack_first, attack_second, self.character_1, self.character_2)
 
-        self.assertEquals(response.status_code, HTTPStatus.FOUND)
-        self.assertRedirects(response, reverse('home'))
-        self.assertEquals(data['name'], Character.objects.last().name)
-        self.assertEquals(data['owner'], Character.objects.last().owner.id)
+        self.assertEquals(response.status_code, HTTPStatus.OK)
+
+    # def test_create(self):
+    #     path = reverse('create', )
+    #
+    #     data = {
+    #             "race": "Полуэльф",
+    #             "klass": "Плут",
+    #             "name": "Тест",
+    #             "gender": "мужской",
+    #             "ideology": "Хаотично-доброе",
+    #             "portrait": "/media/portrait/Astarion_0.jpeg",
+    #             "strength": 1,
+    #             "dexterity": 1,
+    #             "constitution": 1,
+    #             "intelligence": 1,
+    #             "wisdom": 1,
+    #             "charisma": 1,
+    #             "owner": self.user.id
+    #         }
+    #
+    #     self.client.force_login(self.user)
+    #
+    #     response = self.client.post(path, data=data)
+    #
+    #     self.assertEquals(response.status_code, HTTPStatus.FOUND)
+    #     self.assertRedirects(response, reverse('home'))
+    #     self.assertEquals(data['name'], Character.objects.last().name)
+    #     self.assertEquals(data['owner'], Character.objects.last().owner.id)

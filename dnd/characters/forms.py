@@ -7,4 +7,9 @@ class CharacterForm(ModelForm):
     class Meta:
         model = Character
         fields = '__all__'
-        widgets = {'owner': HiddenInput()}
+        widgets = {'owner': HiddenInput(),
+                   'level': HiddenInput(),
+                   'experience': HiddenInput(),
+                   'hp': HiddenInput(),
+                   'ac': HiddenInput(),
+                   }

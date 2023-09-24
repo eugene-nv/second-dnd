@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     'users',
     'characters',
+    'battle',
 
     'api',
     'rest_framework',

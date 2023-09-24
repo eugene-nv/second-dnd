@@ -17,7 +17,10 @@ class Character(models.Model):
     ideology = models.CharField(max_length=255, choices=IDEOLOGY, verbose_name='Мировоззрение')
     portrait = models.ImageField(upload_to='portrait/', null=True, verbose_name='Портрет')
 
-    level = 1
+    level = models.IntegerField(verbose_name='Уровень', blank=True, null=True)
+    experience = models.IntegerField(verbose_name='Опыт', blank=True, null=True)
+    hp = models.IntegerField(verbose_name='Здоровье', blank=True, null=True)
+    ac = models.IntegerField(verbose_name='Класс доспехов', blank=True, null=True)
 
     strength = models.IntegerField(verbose_name='Сила')
     dexterity = models.IntegerField(verbose_name='Ловкость')

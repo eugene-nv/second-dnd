@@ -13,7 +13,6 @@ urlpatterns = [
     path('create/', CreateCharacter.as_view(), name='create'),
 
     path('vue-list/', list_app, name="list"),
-    path('vue-create/', create_app, name="list")
-
+    path('vue-create/', create_app, name="list"),
 
 ]
