@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+
+{% block content %}
+
+<h1>Арена</h1>
+<div class="px-8">
+    <a class="inline-block rounded-lg py-2 px-4 hover:bg-slate-100 hover:text-slate-900" href="{% url 'select' %}">Выбрать персонажа для боя</a>
+</div>
+
+<div class="px-8">
+    <a class="inline-block rounded-lg py-2 px-4 hover:bg-slate-100 hover:text-slate-900" href="{% url 'random-battle' %}">Рандомная битва</a>
+</div>
+
+<div class="flex m-8 p-8">
+
+    <table class="table-auto">
+  <thead>
+    <tr>
+      <th>Персонаж</th>
+      <th>Противник</th>
+      <th>Победитель</th>
+    </tr>
+  </thead>
+      {% for r in result %}
+  <tbody>
+    <tr>
+      <td>{{r.first_character}}</td>
+      <td>{{r.second_character}}</td>
+      <td>{{r.result}}</td>
+  </tbody>
+      {% endfor %}
+</table>
+
+</div>
+{% endblock content %}

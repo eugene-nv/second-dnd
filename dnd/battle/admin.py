@@ -1,3 +1,10 @@
 from django.contrib import admin
+from django.contrib.admin import ModelAdmin
 
-# Register your models here.
+from .models import BattleResult
+
+
+@admin.register(BattleResult)
+class BattleResultAdmin(ModelAdmin):
+    pass
+

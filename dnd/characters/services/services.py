@@ -132,6 +132,7 @@ def fight(f, s):
         log.append(f'Атака {f.name}: {ac_befor_attack} - {attak_f} = {s.ac}')
 
         if s.ac <= 0:
+            log.append('Попадание')
             dammage_f = damage(f)
             hp_befor_dammage = s.hp
             s.hp -= dammage_f
@@ -152,6 +153,8 @@ def fight(f, s):
                 s.save()
 
                 break
+        else:
+            log.append('Промах')
 
         # Second character turn
 
@@ -162,6 +165,7 @@ def fight(f, s):
         log.append(f'Атака {s.name}: {ac_befor_attack} - {attak_s} = {f.ac}')
 
         if f.ac <= 0:
+            log.append('Попадание')
             dammage_s = damage(s)
             hp_befor_dammage = f.hp
             f.hp -= dammage_s
@@ -182,6 +186,8 @@ def fight(f, s):
                 s.save()
 
                 break
+        else:
+            log.append('Промах')
 
     return {
         'log': log,
