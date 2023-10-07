@@ -150,3 +150,5 @@ MEDIA_URL = '/media/'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
+
+CELERY_BROKER_URL = 'redis://redis:6379/0'

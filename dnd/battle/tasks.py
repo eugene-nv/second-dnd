@@ -1,5 +1,7 @@
 import random
 
+from celery import shared_task
+
 from characters.models import Character
 
 all_characters = Character.objects.all()
@@ -110,8 +112,8 @@ def start_hp(hero):
 def start_ac(hero):
     return modifier(hero.dexterity) + modifier(hero.constitution) + 10
 
-
-def fight(f, s):
+@shared_task
+def random_fight(f, s):
     log = []
     result = None
 
@@ -187,9 +189,9 @@ def fight(f, s):
 
                 break
         else:
-            log.append(' ')
+            log.append('Промах')
 
-    return {
-        'log': log,
-        'result': result
-    }
+        # return {
+        #     'log': log,
+        #     'result': result
+        # }

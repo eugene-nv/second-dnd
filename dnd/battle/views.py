@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, ListView
 
+from .tasks import random_fight
 from characters.services.services import *
 from .forms import BattleResultForm
 from characters.models import Character
@@ -38,10 +39,12 @@ def random_battle_app(request):
     first_character = Character.objects.get(pk=characters[0])
     second_character = Character.objects.get(pk=characters[1])
 
+    random_fight.delay(first_character, second_character)
+
     context = {
         'first_character': first_character,
         'second_character': second_character,
-        'fight': fight(first_character, second_character),
+        # 'fight': random_fight.delay(first_character, second_character),
     }
 
     return render(request, 'battle.html', context)
