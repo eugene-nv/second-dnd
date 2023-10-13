@@ -1,35 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="flex justify-center">
-        <div class="px-4 pt-4 m-8 border-4 border-red-600/50 rounded-lg hover:bg-yellow-50" >
-            <p><img class="h-72 w-48 object-cover rounded-lg" src="{{first_character.portrait.url}}" alt="img"></p><br>
-            <a class="underline underline-offset-2 font-semibold text-red-700 hover:text-red-500 justify-center flex" href="{% url 'show_characters' first_character.pk %}">{{ first_character.name }}</a>
-            <p class="justify-center flex py-4">{{ first_character.race }} - {{ first_character.klass }}</p>
-            <p>Опыт {{first_character.experience}}</p>
-            <p>Уровень {{first_character.level}}</p>
-            <p class="justify-center flex pb-4">Здоровье {{first_character.hp}}</p>
-            <p class="justify-center flex pb-4">Класс доспехов {{first_character.ac}}</p>
-        </div>
+<!--    <div class="flex justify-center">-->
+<!--        <div class="px-4 pt-4 m-8 border-4 border-red-600/50 rounded-lg hover:bg-yellow-50" >-->
+<!--            <p><img class="h-72 w-48 object-cover rounded-lg" src="{{first_character.portrait.url}}" alt="img"></p><br>-->
+<!--            <p class="justify-center flex py-4">{{ first_character.race }} - {{ first_character.klass }}</p>-->
+<!--            <p>Опыт {{first_character.experience}}</p>-->
+<!--            <p>Уровень {{first_character.level}}</p>-->
+<!--            <p class="justify-center flex pb-4">Здоровье {{first_character.hp}}</p>-->
+<!--            <p class="justify-center flex pb-4">Класс доспехов {{first_character.ac}}</p>-->
+<!--        </div>-->
 
-        <div class="justify-center flex">
+<!--        <div class="justify-center flex">-->
 <!--            <h1>Победитель {{fight.result}}</h1><br><br>-->
 
 <!--            {% for l in  fight.log %}-->
 <!--                {{l}}<br><br>-->
 <!--            {% endfor %}-->
-        </div>
+<!--        </div>-->
 
-        <div class="px-4 pt-4 m-8 border-4 border-red-600/50 rounded-lg hover:bg-yellow-50" >
-            <p><img class="h-72 w-48 object-cover rounded-lg" src="{{second_character.portrait.url}}" alt="img"></p><br>
-            <a class="underline underline-offset-2 font-semibold text-red-700 hover:text-red-500 justify-center flex" href="{% url 'show_characters' second_character.pk %}">{{ second_character.name }}</a>
-            <p class="justify-center flex py-4">{{ second_character.race }} - {{ second_character.klass }}</p>
-            <p>Опыт {{second_character.experience}}</p>
-            <p>Уровень {{second_character.level}}</p>
-            <p class="justify-center flex pb-4">Здоровье {{second_character.hp}}</p>
-            <p class="justify-center flex pb-4">Класс доспехов {{second_character.ac}}</p>
-        </div>
-    </div>
+<!--        <div class="px-4 pt-4 m-8 border-4 border-red-600/50 rounded-lg hover:bg-yellow-50" >-->
+<!--            <p><img class="h-72 w-48 object-cover rounded-lg" src="{{second_character.portrait.url}}" alt="img"></p><br>-->
+<!--            <p class="justify-center flex py-4">{{ second_character.race }} - {{ second_character.klass }}</p>-->
+<!--            <p>Опыт {{second_character.experience}}</p>-->
+<!--            <p>Уровень {{second_character.level}}</p>-->
+<!--            <p class="justify-center flex pb-4">Здоровье {{second_character.hp}}</p>-->
+<!--            <p class="justify-center flex pb-4">Класс доспехов {{second_character.ac}}</p>-->
+<!--        </div>-->
+<!--    </div>-->
 
-
+{{ r.result }}
+{{ r.first_character }}{{ r.second_character }}
+{{ r.log}}{{ r.date }}
 {% endblock content %}

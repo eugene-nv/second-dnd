@@ -112,6 +112,7 @@ def start_ac(hero):
 
 
 def fight(f, s):
+
     log = []
     result = None
 
@@ -173,6 +174,7 @@ def fight(f, s):
 
             if f.hp <= 0:
                 result = s.name
+
                 s.experience += 300
                 s.level = check_level(s)
 

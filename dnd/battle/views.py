@@ -1,16 +1,19 @@
-from django.http import HttpResponse
+import time
+
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 import random
 
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 
-from .tasks import random_fight
-from characters.services.services import *
+# from .tasks import fight
+from characters.services.services import character_list, fight
 from .forms import BattleResultForm
 from characters.models import Character
 from .models import BattleResult
+from .tasks import fight_task
 
 
 class SelectViews(CreateView):
@@ -23,51 +26,23 @@ class SelectViews(CreateView):
     def form_valid(self, form):
         b = BattleResult.objects.last()
         instance = form.save(commit=False)
-        second_char_name = random.choice([i.name for i in character_list if i.name != b.first_character])
-
-        instance.second_character = second_char_name
-
+        instance.second_character = random.choice([i.name for i in character_list if i.name != b.first_character])
         instance.save()
         return super().form_valid(form)
-
-
-def random_battle_app(request):
-    char_id_list = [i.id for i in character_list]
-    random.shuffle(char_id_list)
-    characters = char_id_list[:2]
-
-    first_character = Character.objects.get(pk=characters[0])
-    second_character = Character.objects.get(pk=characters[1])
-
-    random_fight.delay(first_character, second_character)
-
-    context = {
-        'first_character': first_character,
-        'second_character': second_character,
-        # 'fight': random_fight.delay(first_character, second_character),
-    }
-
-    return render(request, 'battle.html', context)
 
 
 def battle_app(request):
     battle = BattleResult.objects.last()
 
-    first_character = Character.objects.get(name=battle.first_character)
-    second_character = Character.objects.get(name=battle.second_character)
-
-    if battle.result:
-        f = 'End'
-    else:
-        f = fight(first_character, second_character)
-        battle.result = f['result']
-        battle.save()
+    fight_task.delay(battle.id)
 
     context = {
-        'first_character': first_character,
-        'second_character': second_character,
-        'fight': f,
+        'first_character': battle.first_character,
+        'second_character': battle.second_character,
+        'result': battle.result,
+        'log': battle.log,
     }
+
 
     return render(request, '2battle.html', context)
 

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 from .lib.klasses import *
 from .lib.races import *
@@ -38,3 +39,6 @@ class Character(models.Model):
         verbose_name = 'Персонаж'
         verbose_name_plural = 'Персонажи'
         ordering = ['id']
+
+    def get_absolute_url(self):
+        return reverse('first_character', kwargs={'pk': self.pk})
