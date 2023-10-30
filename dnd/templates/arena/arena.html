@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+
+{% block content %}
+    <h1 class="text-2xl m-10 flex justify-center text-red-600">Арена</h1>
+    <div class="m-4 flex flex-nowrap justify-center">
+        <p>Каждый день на арене проходит 5 случайных поединков</p>
+    </div>
+    <div class=" m-8 p-8 relative overflow-x-auto sm:rounded-lg flex flex-nowrap justify-center">
+
+    <table class="table-auto text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3"></th>
+          <th scope="col" class="px-6 py-3">Персонаж № 1</th>
+          <th scope="col" class="px-6 py-3">Персонаж № 2</th>
+          <th scope="col" class="px-6 py-3">Победитель</th>
+          <th scope="col" class="px-6 py-3"></th>
+        </tr>
+      </thead>
+          {% for r in result %}
+      <tbody>
+        <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+          <td scope="col" class="px-6 py-3">{{r.id}}</td>
+          <td scope="col" class="px-6 py-3">{{r.first_character.name}}</td>
+          <td scope="col" class="px-6 py-3">{{r.second_character.name}}</td>
+          <td scope="col" class="px-6 py-3">{{r.result}}</td>
+          <td>
+              <a class="font-medium text-red-600 dark:text-red-500 hover:underline" href="{% url 'show_battle_result' r.pk %}">Результат</a>
+          </td>
+      </tbody>
+          {% endfor %}
+    </table>
+    </div>
+
+
+
+
+{% endblock content %}

@@ -5,10 +5,15 @@ from django.views.generic import TemplateView
 from .views import *
 
 urlpatterns = [
+
+    # path('', arena, name="arena"),
+    # path('battle-result/<int:pk>/', ShowBattleResult.as_view(), name='show_battle_result'),
+    path('battle-result/<int:battle_id>/', show_battle_result, name='show_battle_result'),
+
     path('', ArenaView.as_view(), name="arena"),
-    path('b', battle_app, name="2battle"),
-    path('select', SelectViews.as_view(), name="select"),
-    # path('test', select_for_battle, name="select"),
+    # path('battle/<int:pk>/', ShowBattle.as_view(), name='show_battle'),
+    # path('battle/<int:pk>/', show_battle, name='show_battle'),
+
 
 
 

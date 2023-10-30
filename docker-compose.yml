@@ -31,4 +31,4 @@ services:
       context: .
     volumes:
       - ./dnd:/dnd
-    command: celery -A core beat -l info
+    command: ['celery', '--workdir=.', '-A', 'dnd', 'beat', '-l', 'INFO', '--scheduler', 'django_celery_beat.schedulers:DatabaseScheduler']

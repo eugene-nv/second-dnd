@@ -50,10 +50,13 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
 
+
     'corsheaders',
 
     "crispy_forms",
     "crispy_tailwind",
+
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
