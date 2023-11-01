@@ -17,7 +17,7 @@ class CharacterViews(ListView):
 
 
 class OwnerCharactersViews(ListView):
-    template_name = 'character/my_char.html'
+    template_name = 'character/user_character.html'
     context_object_name = 'characters'
 
     def get_queryset(self):
@@ -44,9 +44,8 @@ class CreateCharacter(CreateView):
 
 class ShowCharacter(DetailView):
     model = Character
-    template_name = 'character/char.html'
+    template_name = 'character/character_card.html'
     context_object_name = 'char'
-    extra_context = {'time': str(datetime.now().time()).split(':')[0]}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -69,6 +68,7 @@ class CharacterUpdateView(UpdateView):
     fields = ['name', 'portrait', 'ideology']
     template_name = 'character/update.html'
     success_url = reverse_lazy("characters")
+    extra_context = {'time': str(datetime.now().time()).split(':')[0]}
 
 
 def list_app(request):
